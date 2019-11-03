@@ -19,7 +19,8 @@ def frameword_error(e):
         error_code = 1007
         return APIException(msg, code, error_code)
     else:
-        return APIException()
+        # return APIException()
+        raise e
 
 
 if __name__ == "__main__":

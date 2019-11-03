@@ -6,3 +6,4 @@ cymysql
 flask-login
 flask-mail
 flask-cache
+Flask-HTTPAuth
