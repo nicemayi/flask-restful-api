@@ -1,4 +1,3 @@
-from wtforms import Form
 from wtforms import StringField
 from wtforms import IntegerField
 from wtforms.validators import Email
@@ -9,9 +8,10 @@ from wtforms.validators import Regexp
 
 from app.libs.enums import ClientTypeEnum
 from app.models.user import User
+from app.validators.base import BaseForm
 
 
-class ClientForm(Form):
+class ClientForm(BaseForm):
     account = StringField(validators=[DataRequired(), length(min=5, max=32)])
     secret = StringField()
     type = IntegerField(validators=[DataRequired()])

@@ -1,6 +1,12 @@
 from app.libs.error import APIException
 
 
+class Success(APIException):
+    code = 201
+    msg = 'ok'
+    error_code = 0
+
+
 class ClientTypeError(APIException):
     code = 400
     description = (
@@ -17,3 +23,9 @@ class EmailRegisterError(APIException):
     )
     error_code = 1006
     msg = 'you can not use this email to register'
+
+
+class ParameterException(APIException):
+    code = 400
+    msg = 'invalid parameter'
+    error_code = 1000
