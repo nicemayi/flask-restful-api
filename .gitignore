@@ -1,0 +1,7 @@
+virtualenv
+archive
+mysql_db
+redis_db
+credentials
+.vscode
+__pycache__
