@@ -40,3 +40,8 @@ class NotFound(APIException):
 class AuthFailed(APIException):
     code = 401
     error_code = 1005
+
+
+class ServerError(APIException):
+    code = 500
+    error_code = 999

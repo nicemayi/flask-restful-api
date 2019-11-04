@@ -1,23 +1,19 @@
-from flask import Flask
+from flask import Flask as _Flask
+from flask.json import JSONEncoder as _JSONEncoder
+from datetime import date
+from app.libs.error_code import ServerError
 
 
-def register_blueprint(app):
-    from app.api.v1 import create_blueprint_v1
-    app.register_blueprint(create_blueprint_v1(), url_prefix='/v1')
+class JSONEncoder(_JSONEncoder):
+
+    def default(self, o):
+        if hasattr(o, 'keys') and hasattr(o, '__getitem__'):
+            return dict(o)
+        if isinstance(o, date):
+            return o.strftime('%Y-%m-%d')
+        raise ServerError()
 
 
-def register_plugin(app):
-    from app.models.base import db
-    db.init_app(app)
-    with app.app_context():
-        db.create_all()
+class Flask(_Flask):
+    json_encoder = JSONEncoder
 
-
-def create_app():
-    app = Flask(__name__)
-    app.config.from_object('app.config.setting')
-    app.config.from_object('app.config.secure')
-
-    register_blueprint(app)
-    register_plugin(app)
-    return app

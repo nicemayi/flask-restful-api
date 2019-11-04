@@ -1,3 +1,5 @@
+from flask import jsonify
+
 from app.libs.redprint import Redprint
 from app.libs.token_auth import auth
 from app.models.user import User
@@ -11,4 +13,4 @@ def get_user(uid):
     # validate token legal
     # validate token expiration
     user = User.query.get_or_404(uid)
-    return 'i am zw'
+    return jsonify(user)

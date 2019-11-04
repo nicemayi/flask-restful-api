@@ -18,6 +18,9 @@ class User(Base):
     auth = Column(SmallInteger, default=1)
     _password = Column('password', String(100))
 
+    def keys(self):
+        return ('id', 'email', 'nickname', 'auth',)
+
     @property
     def password(self):
         return self._password
