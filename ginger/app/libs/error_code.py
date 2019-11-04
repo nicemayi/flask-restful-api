@@ -7,6 +7,11 @@ class Success(APIException):
     error_code = 0
 
 
+class DeleteSuccess(Success):
+    code = 202
+    error_code = -1
+
+
 class ClientTypeError(APIException):
     code = 400
     description = (

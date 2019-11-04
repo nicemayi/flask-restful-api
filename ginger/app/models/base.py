@@ -33,8 +33,8 @@ class Query(BaseQuery):
             raise NotFound()
         return rv
 
-    def first_or_404(self, ident):
-        rv = self.get(ident)
+    def first_or_404(self):
+        rv = self.first()
         if rv is None:
             raise NotFound()
         return rv

@@ -5,3 +5,4 @@
 1001 - resource not found
 1002 - token is invalid
 1003 - token is expird
+-1 - delete success
