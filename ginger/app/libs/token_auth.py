@@ -6,7 +6,13 @@ from itsdangerous import BadSignature
 from itsdangerous import SignatureExpired
 from flask import g
 from flask import current_app
+from flask import request
+
 from app.libs.error_code import AuthFailed
+from app.libs.error_code import Forbidden
+from app.libs.scope import AdminScope
+from app.libs.scope import UserScope
+from app.libs.scope import is_in_scope
 
 
 auth = HTTPBasicAuth()
@@ -34,5 +40,10 @@ def verify_auth_token(token):
 
     uid = data['uid']
     ac_type = data['type']
-    scope = data['is_admin']
+    scope = data['scope']
+
+    # request 视图函数
+    allow = is_in_scope(scope, request.endpoint)
+    if not allow:
+        raise AuthFailed(msg='You are forbidden!', error_code=1003)
     return User(uid=uid, ac_type=ac_type, scope=scope)

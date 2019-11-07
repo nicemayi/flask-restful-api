@@ -50,3 +50,9 @@ class AuthFailed(APIException):
 class ServerError(APIException):
     code = 500
     error_code = 999
+
+
+class Forbidden(APIException):
+    code = 403
+    error_code = 1004
+    msg = 'forbidden, not in scope'

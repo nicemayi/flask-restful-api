@@ -17,17 +17,14 @@ api = Redprint('user')
 def super_get_user(uid):
     # validate token legal
     # validate token expiration
-    scope = g.user.is_admin
-    if not scope:
-        raise AuthFailed()
     user = User.query.filter_by(id=uid).first_or_404()
     return jsonify(user)
 
 
 @api.route('', methods=['GET'])
 @auth.login_required
-def get_user(uid):
-    uid = g.user.id
+def get_user():
+    uid = g.user.uid
     # filter_by不会把status=0的找出来
     user = User.query.filter_by(id=uid).first_or_404()
     return jsonify(user)
